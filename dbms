@@ -1,0 +1,156 @@
+mca@MCA48:~/Desktop$ sudo mysql
+[sudo] password for mca: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.36-0ubuntu0.20.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE COLLEGE;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| COLLEGE            |
+| COLLEGEILA         |
+| abc                |
+| alfred             |
+| college            |
+| college1           |
+| collegedb          |
+| emp                |
+| employee           |
+| employee1          |
+| employee2db        |
+| employeenest       |
+| ilahia             |
+| information_schema |
+| kdanco             |
+| loan               |
+| mysql              |
+| passenger          |
+| performance_schema |
+| sys                |
++--------------------+
+20 rows in set (0.01 sec)
+
+mysql> use COLLEGE;
+Database changed
+mysql> create table student(rollno int,name varchar(20),course varchar(20),
+    -> create table student(rollno int,name varchar(20),course varchar(20),year int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'create table student(rollno int,name varchar(20),course varchar(20),year int)' at line 2
+mysql> CREATE table student(rollno int,name varchar(20),course varchar(20),year int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> Describe table student;
++----+-------------+---------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table   | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+---------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | student | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    1 |   100.00 | NULL  |
++----+-------------+---------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.01 sec)
+
+mysql> insert into student VALUES(1,'nija','MCA',2024);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student VALUES(2,'rahmath','MCA',2024);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into student VALUES(3,'fathima','MCA',2024);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from student;
++--------+---------+--------+------+
+| rollno | name    | course | year |
++--------+---------+--------+------+
+|      1 | nija    | MCA    | 2024 |
+|      2 | rahmath | MCA    | 2024 |
+|      3 | fathima | MCA    | 2024 |
++--------+---------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student add(address varchar(20));
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> Describe table student;
++----+-------------+---------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table   | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+---------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | student | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    3 |   100.00 | NULL  |
++----+-------------+---------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.01 sec)
+
+mysql> select * from student;
++--------+---------+--------+------+---------+
+| rollno | name    | course | year | address |
++--------+---------+--------+------+---------+
+|      1 | nija    | MCA    | 2024 | NULL    |
+|      2 | rahmath | MCA    | 2024 | NULL    |
+|      3 | fathima | MCA    | 2024 | NULL    |
++--------+---------+--------+------+---------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student drop address;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> Describe table student;
++----+-------------+---------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table   | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+---------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | student | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    3 |   100.00 | NULL  |
++----+-------------+---------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select * from student;
++--------+---------+--------+------+
+| rollno | name    | course | year |
++--------+---------+--------+------+
+|      1 | nija    | MCA    | 2024 |
+|      2 | rahmath | MCA    | 2024 |
+|      3 | fathima | MCA    | 2024 |
++--------+---------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> Describe student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| rollno | int         | YES  |     | NULL    |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| course | varchar(20) | YES  |     | NULL    |       |
+| year   | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> truncate table student;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> Describe student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| rollno | int         | YES  |     | NULL    |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| course | varchar(20) | YES  |     | NULL    |       |
+| year   | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from student;
+Empty set (0.00 sec)
+
+mysql> 
+
+
